@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Colors for devs</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="icon" type="image/png" href="favicon.ico">
+		<meta property="og:url"           content="http://coloripsum.com" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="Colors for devs" />
+		<meta property="og:description"   content="Colors for devs makes it easy for you to create color palette for your next project." />
+		<meta property="og:image"         content="http://coloripsum.com/palette.jpg" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|Montserrat:400,700|Merienda+One' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+		<link href='style.css' rel='stylesheet' type='text/css'>
+		<script src="coloripsum.js"></script>
+		<script src="functions.js"></script> 
+		<link href='spectrum.css' rel='stylesheet' type='text/css'>
+		<script src="spectrum.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="panel about">
+				<div class="about-container">
+					<div class="version-palette">
+						<div class="base version"></div>
+						<div class="complementary version"></div>
+						<div class="shadows version"></div>
+						<div class="background version"></div>
+					</div>
+					<div class="about-main">
+						<div class="about-description">
+							<h1 class="version-name">What is this site?</h1>
+							<p class="version-description">Colors for devs is designed and developed as a tool for helping developers (and people who don't enjoy messing around with colors) create palettes for their projects. </p>
+							<h1 class="version-name">Version:</h1>
+							<div class="version-color"></div>
+							<h1 class="version-name">(1.0)</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel main">
+				<div class="title">
+					<p>Colors for devs</p>
+				</div>
+				<div class="controls">
+					<h1 class="refresh_header">Generate a new palette</h1>
+					<div class="refresh">
+						<div class="button_fa">
+							<i class="fa fa-refresh" aria-hidden="true"></i>
+						</div>
+						<div class="separator">
+							<p><span>OR</span></p>
+							<div class="line"></div>
+						</div>
+						<input type='text' id="color_select" />
+					</div>
+					<!--<h1 class="select_header">Or generate from a base color</h1>
+					<div class="base_selection">
+						<input type='text' id="color_select" />
+					</div>-->
+				</div>
+				<div class="share-wrapper">
+					<div class="share">
+						<!-- Twitter -->
+						<a href="http://twitter.com/share?url=http://coloripsum.com&text=Colors%2Bfor%2Bdevs&via=primitiveart" target="_blank" class="share-button twitter">
+							<i class="fa fa-twitter"></i>
+						</a>
+
+						<!-- Google Plus -->
+						<a href="https://plus.google.com/share?url=http://coloripsum.com" target="_blank" class="share-button gplus">
+							<i class="fa fa-google-plus"></i>
+						</a>
+
+						<!-- Facebook -->
+						<a href="http://www.facebook.com/sharer/sharer.php?u=http://coloripsum.com" target="_blank" class="share-button fb">
+							<i class="fa fa-facebook"></i>
+						</a>
+					</div>
+				</div>
+				<div class="build-info">
+					<p>Homebrewed in 2016</p>
+					<div class="version-color"></div>
+				</div>
+			</div>
+			<div class="panel results">
+				<div class="palette">
+					<div class="base color"></div>
+					<div class="complementary color"></div>
+					<div class="shadows color"></div>
+					<div class="background color"></div>
+				</div>
+				<div class="colorsHex">
+					<div class="base hex"></div>
+					<div class="complementary hex"></div>
+					<div class="shadows hex"></div>
+					<div class="background hex"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
