@@ -82,9 +82,6 @@ var coloripsum = function(options){
 		while(complementary.length < 6){
 			complementary = '0' + complementary;
 		}
-		/*if(complementary.length < 6){
-			complementary = '0' + complementary;
-		}*/
 		
 		return '#' + complementary;
 	}

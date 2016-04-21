@@ -29,6 +29,12 @@ $(document).ready(function(){
 		randomScheme();
 	});
 	
+	$(document).on('keydown', function(e){
+		if(e.keyCode == 32) {
+			randomScheme();
+		}
+	});
+	
 	$('.palette').on('click','.color',function(){
 		var color = $(this).attr('class').replace(' color','');
 		
@@ -128,7 +134,6 @@ $(document).ready(function(){
 	window.onpopstate = function(event) {
 		if(event.state !== null){
 			refreshUI(event.state.scheme);
-			//console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
 		}
 	};
 
@@ -163,7 +168,7 @@ function checkForUrlValues(){
 	var currentState = window.location.pathname;
 	var hrefArray = currentState.split('/');
 	var hexString = hrefArray[hrefArray.length - 1];
-	if(hexString.match(/^((-|)(([a-fA-F0-9])+){6}){4}$/ig) !== null){
+	if(hexString.match(/^(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})$/ig) !== null){
 		var colorsArray = hexString.split('-');
 		scheme = {
 			main : '#' + colorsArray[0],
@@ -171,6 +176,8 @@ function checkForUrlValues(){
 			texts : '#' + colorsArray[2],
 			background : '#' + colorsArray[3],
 		};
+		
+		history.replaceState({scheme: scheme}, 'Color for devs');
 	}
 	
 	return scheme;
@@ -197,8 +204,8 @@ function versionPalette(options){
 
 function refreshUI(scheme){
 	var background = cfd.hexOpacity(scheme.main, 0.1, '#FFFFFF');
-	//var background = cfd.hexToRGBA(scheme.main, 0.1);
-	//var hexString = cfd.hexToRGBA(scheme.main, 0.6);
+	//var background = cfd.hexToRGBA(scheme.main, 0.1); - returned an rgba, now returns the hex value of what this rgba looked like
+	//var hexString = cfd.hexToRGBA(scheme.main, 0.6); - returned an rgba, now returns the hex value of what this rgba looked like
 	var hexString = cfd.hexOpacity(scheme.main, 0.6, background);
 	
 	$('.base.color').css({
@@ -229,14 +236,6 @@ function refreshUI(scheme){
 	$('.colorsHex').css({
 		'color' : hexString
 	});
-		
-	/*$('.title').css({
-		'color' : scheme.texts
-	});
-	
-	$('.button_fa').css({
-		'color' : scheme.texts
-	});*/
 	
 	$('.main').css({
 		'color' : scheme.texts
@@ -274,10 +273,6 @@ function refreshVersionPalette(scheme){
 	$('.background.version').css({
 		'background' : scheme.background
 	});
-		
-	/*$('.results').css({
-		'background' : 'rgba(' + background.r + ', ' + background.g + ', ' + background.b + ', ' + background.a + ')' 
-	});*/
 	
 	$('.about-main').css({
 		'color' : scheme.texts
