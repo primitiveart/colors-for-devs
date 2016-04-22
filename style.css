@@ -210,6 +210,14 @@ h1.select_header {
     top: 46%;
 }
 
+.rotate {
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
+
 .animate {
 	-webkit-transition: -webkit-transform .7s ease-in-out;
     -moz-transition: -moz-transform .7s ease-in-out;

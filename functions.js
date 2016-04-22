@@ -7,29 +7,17 @@ $(document).ready(function(){
 	$('.main').on('click', '.refresh > .button_fa', function(){
 		var $element = $(this);
 		
-		$element.addClass('animate').css({
-			'-moz-transform':'rotate('+360+'deg)',
-			'-webkit-transform':'rotate('+360+'deg)',
-			'-o-transform':'rotate('+360+'deg)',
-			'-ms-transform':'rotate('+360+'deg)',
-			'transform':'rotate('+360+'deg)'
-		});
+		$element.addClass('animate rotate');
 		
 		setTimeout(function(){
-			$element.removeClass('animate').css({
-				'-moz-transform':'rotate('+0+'deg)',
-				'-webkit-transform':'rotate('+0+'deg)',
-				'-o-transform':'rotate('+0+'deg)',
-				'-ms-transform':'rotate('+0+'deg)',
-				'transform':'rotate('+0+'deg)'
-			}); 
+			$element.removeClass('animate rotate'); 
 		},700);
 		
 		
 		randomScheme();
 	});
 	
-	$(document).on('keydown', function(e){
+	$(document).on('keyup', function(e){
 		if(e.keyCode == 32) {
 			randomScheme();
 		}
@@ -207,6 +195,7 @@ function refreshUI(scheme){
 	//var background = cfd.hexToRGBA(scheme.main, 0.1); - returned an rgba, now returns the hex value of what this rgba looked like
 	//var hexString = cfd.hexToRGBA(scheme.main, 0.6); - returned an rgba, now returns the hex value of what this rgba looked like
 	var hexString = cfd.hexOpacity(scheme.main, 0.6, background);
+	var textsColor = cfd.hexBlendOverlay(scheme.main, 0.2, '#424242');
 	
 	$('.base.color').css({
 		'background' : scheme.main
@@ -237,12 +226,8 @@ function refreshUI(scheme){
 		'color' : hexString
 	});
 	
-	$('.main').css({
-		'color' : scheme.texts
-	});
-	
-	$('.sp-preview').css({
-		'color' : scheme.texts
+	$('.main, .sp-preview').css({
+		'color' : textsColor
 	});
 	
 	$('.base_selection .button_fa, .sp-preview').css({
@@ -250,7 +235,7 @@ function refreshUI(scheme){
 	});
 	
 	$('.line').css({
-		'background' : scheme.texts
+		'background' : textsColor
 	});
 	
 	$('#color_select').spectrum("set", scheme.main);

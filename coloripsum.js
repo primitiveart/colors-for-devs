@@ -1,6 +1,6 @@
 var coloripsum = function(options){
 	
-	var object = this;
+	var ci = this;
 	
 	var defaults = {};
 	
@@ -26,7 +26,7 @@ var coloripsum = function(options){
 		var textsHex = randomShades(true);
 		var backgroundHex = randomShades(false);
 	
-		var palette = object.palette({
+		var palette = ci.palette({
 			mainHex : mainHex,
 			textsHex : textsHex,
 			backgroundHex : backgroundHex
@@ -43,7 +43,7 @@ var coloripsum = function(options){
 		}
 		var opts = extend(defaults, options);
 		
-		var palette = new paletteTemplate;
+		var palette = new paletteTemplate();
 		
 		palette.main = opts.mainHex;
 		palette.noHash.main = cutHex(palette.main);
@@ -76,6 +76,10 @@ var coloripsum = function(options){
 		return hexOpacity(hex, alpha, baseHex);
 	}
 	
+	this.hexBlendOverlay = function(hex, alpha, baseHex){
+		return hexBlendOverlay(hex, alpha, baseHex);
+	}
+	
 	function findComplementary(mainHex){
 		var hex = hexStringTohex(mainHex);
 		var complementary = (000000 + ((0xffffff - hex).toString(16))).slice(-6);
@@ -87,7 +91,7 @@ var coloripsum = function(options){
 	}
 	
 	function blendMultiply(baseRGB, colorRGB){
-		var blend = new Object();
+		var blend = {};
 	  
 		blend.r = Math.round((2 * baseRGB.r * colorRGB.r) / 255);
 		blend.g = Math.round((2 * baseRGB.g * colorRGB.g) / 255);
@@ -98,7 +102,7 @@ var coloripsum = function(options){
 	}
 	
 	function blendScreen(baseRGB, colorRGB){
-		var blend = new Object();
+		var blend = {};
 	  
 		blend.r = Math.round((1 - ((1 - (baseRGB.r/255)) * (1 - (2 * colorRGB.r/255 - 1)))) * 255);
 		blend.g = Math.round((1 - ((1 - (baseRGB.g/255)) * (1 - (2 * colorRGB.g/255 - 1)))) * 255);
@@ -127,7 +131,7 @@ var coloripsum = function(options){
 	}
 	
 	function rgbaToHex(rgba, baseRGB){
-		var rgb = new Object();
+		var rgb = {};
 		
 		rgb.r = (1 - rgba.a) * baseRGB.r + rgba.a * rgba.r;
 		rgb.g = (1 - rgba.a) * baseRGB.g + rgba.a * rgba.g;
@@ -204,6 +208,13 @@ var coloripsum = function(options){
 		var baseRGB = hexToRGBA(baseHex, 1);
 		
 		return rgbaToHex(rgba, baseRGB);
+	}
+	
+	function hexBlendOverlay(hex, alpha, baseHex){
+		var rgba = hexToRGBA(hex, alpha);
+		var baseRGB = hexToRGBA(baseHex, 1);
+		
+		return blendOverlay(baseRGB, rgba);
 	}
 	
 	function extend(a, b){
