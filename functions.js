@@ -123,6 +123,9 @@ function initialize(){
 	});
 
 	clipboard.on('error', function(e) {
+		var $element = $(e.trigger);
+		var color = $element.attr('class').replace(' color','');
+		
 		if(!$('.' + color + '.hex .hint')[0]){
 			$('.' + color + '.hex').append('<span class="hint">ctrl+c to copy</span>').show(function(){
 				$('.hint').fadeOut(1000, function(){
