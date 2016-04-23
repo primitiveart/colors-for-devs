@@ -24,9 +24,10 @@ $(document).ready(function(){
 	});
 	
 	$('.colorsHex').on('click','.hex',function(){
+		var elementClass = $(this).attr('class');
 		var range, selection;
 		
-		var element = document.getElementsByClassName( color + ' hex')[0];
+		var element = document.getElementsByClassName(elementClass)[0];
 
 		if (window.getSelection) {
 			selection = window.getSelection();
