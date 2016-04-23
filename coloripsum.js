@@ -80,6 +80,10 @@ var coloripsum = function(options){
 		return hexBlendOverlay(hex, alpha, baseHex);
 	}
 	
+	this.hexLuminocity = function(hex){
+		return hexLuminocity(hex);
+	}
+	
 	function findComplementary(mainHex){
 		var hex = hexStringTohex(mainHex);
 		var complementary = (000000 + ((0xffffff - hex).toString(16))).slice(-6);
@@ -215,6 +219,12 @@ var coloripsum = function(options){
 		var baseRGB = hexToRGBA(baseHex, 1);
 		
 		return blendOverlay(baseRGB, rgba);
+	}
+	
+	function hexLuminocity(hex){
+		var rgb = hexToRGBA(hex, 1);
+		
+		return rgbLuminocity(rgb);
 	}
 	
 	function extend(a, b){

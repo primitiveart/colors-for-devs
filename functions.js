@@ -178,6 +178,11 @@ function versionPalette(options){
 function refreshUI(scheme){
 	var background = cfd.hexOpacity(scheme.main, 0.1, '#FFFFFF');
 	var hexString = cfd.hexOpacity(scheme.main, 0.6, background);
+	
+	if (cfd.hexLuminocity(background) > 0.85 && cfd.hexLuminocity(hexString) > 0.85){
+		var hexString = cfd.hexOpacity(hexString, 0.9, '#424242');
+	}
+	
 	var textsColor = cfd.hexBlendOverlay(scheme.main, 0.2, '#424242');
 	
 	$('.base.color').css({
@@ -222,6 +227,28 @@ function refreshUI(scheme){
 	});
 	
 	$('#color_select').spectrum("set", scheme.main);
+	
+	checkLuminocity(scheme);	
+	
+	function checkLuminocity(scheme){
+		var baseLuminocity = cfd.hexLuminocity(scheme.main);
+		var complementaryLuminocity = cfd.hexLuminocity(scheme.complementary);
+		var shadowsLuminocity = cfd.hexLuminocity(scheme.texts);
+		var backgroundLuminocity = cfd.hexLuminocity(scheme.background);
+		
+		if(baseLuminocity <= 0.8){
+			$('.base.hex .string').addClass('light');
+		}
+		if(complementaryLuminocity <= 0.8){
+			$('.complementary.hex .string').addClass('light');
+		}
+		if(shadowsLuminocity <= 0.8){
+			$('.shadows.hex .string').addClass('light');
+		}
+		if(backgroundLuminocity <= 0.8){
+			$('.background.hex .string').addClass('light');
+		}
+	}
 }
 
 function refreshVersionPalette(scheme){
