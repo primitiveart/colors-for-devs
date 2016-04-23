@@ -23,39 +23,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('.palette').on('click','.color',function(){
-		var color = $(this).attr('class').replace(' color','');
-		
-		var range, selection;
-		
-		var element = document.getElementsByClassName( color + ' hex')[0];
-
-		if (window.getSelection) {
-			selection = window.getSelection();
-			range = document.createRange();
-			range.selectNodeContents(element);
-			selection.removeAllRanges();
-			selection.addRange(range);
-		} else if (document.body.createTextRange) {
-			range = document.body.createTextRange();
-			range.moveToElementText(element);
-			range.select();
-		}
-		
-		if(!$('.' + color + '.hex .hint')[0]){
-			$('.' + color + '.hex').append('<span class="hint">ctrl+c to copy</span>').show(function(){
-				$('.hint').fadeOut(1000, function(){
-					$(this).remove();
-				});
-			});
-		}
-		
-		
-	});
-	
 	$('.colorsHex').on('click','.hex',function(){
-		var color = $(this).attr('class').replace(' color','');
-		
 		var range, selection;
 		
 		var element = document.getElementsByClassName( color + ' hex')[0];
@@ -70,21 +38,10 @@ $(document).ready(function(){
 			range = document.body.createTextRange();
 			range.moveToElementText(element);
 			range.select();
-		}
-		
-		if(!$('.' + color + '.hex .hint')[0]){
-			$('.' + color + '.hex').append('<span class="hint">ctrl+c to copy</span>').show(function(){
-				$('.hint').fadeOut(1000, function(){
-					$(this).remove();
-				});
-			});
-		}
-		
-		
+		}	
 	});
 	
 	$('.main').on('click','.build-info',function(){
-		
 		var color = $('.version-color').css('backgroundColor');
 		if(color.search('rgb') > -1){
 			var breakColor = color.split(',');
@@ -106,7 +63,6 @@ $(document).ready(function(){
 			$('body').css('overflow','auto');
 			$('.about').css('cursor', 'url(close.gif), crosshair');
 		});
-		
 	});
 	
 	$('#container').on('click','.about',function(){
@@ -148,6 +104,31 @@ function initialize(){
 			mainHex : tinycolor.toHexString()
 		}
 		palette(options);
+	});
+	
+	var clipboard = new Clipboard('.color');
+	
+	clipboard.on('success', function(e) {
+		var $element = $(e.trigger);
+		var color = $element.attr('class').replace(' color','');
+
+		if(!$('.' + color + '.hex .hint')[0]){
+			$('.' + color + '.hex').append('<span class="hint">copied to clipboard</span>').show(function(){
+				$('.hint').fadeOut(1000, function(){
+					$(this).remove();
+				});
+			});
+		}
+	});
+
+	clipboard.on('error', function(e) {
+		if(!$('.' + color + '.hex .hint')[0]){
+			$('.' + color + '.hex').append('<span class="hint">ctrl+c to copy</span>').show(function(){
+				$('.hint').fadeOut(1000, function(){
+					$(this).remove();
+				});
+			});
+		}
 	});
 }
 
@@ -192,8 +173,6 @@ function versionPalette(options){
 
 function refreshUI(scheme){
 	var background = cfd.hexOpacity(scheme.main, 0.1, '#FFFFFF');
-	//var background = cfd.hexToRGBA(scheme.main, 0.1); - returned an rgba, now returns the hex value of what this rgba looked like
-	//var hexString = cfd.hexToRGBA(scheme.main, 0.6); - returned an rgba, now returns the hex value of what this rgba looked like
 	var hexString = cfd.hexOpacity(scheme.main, 0.6, background);
 	var textsColor = cfd.hexBlendOverlay(scheme.main, 0.2, '#424242');
 	
@@ -242,7 +221,6 @@ function refreshUI(scheme){
 }
 
 function refreshVersionPalette(scheme){
-	
 	$('.base.version').css({
 		'background' : scheme.main
 	});
@@ -262,5 +240,4 @@ function refreshVersionPalette(scheme){
 	$('.about-main').css({
 		'color' : scheme.texts
 	});
-	
 }

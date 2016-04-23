@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
 		<link href='style.css' rel='stylesheet' type='text/css'>
 		<script src="coloripsum.js"></script>
 		<script src="functions.js"></script> 
@@ -36,7 +37,7 @@
 							<p class="version-description">Colors for devs is designed and developed as a tool for helping developers (and people who don't enjoy messing around with colors) create palettes for their projects. </p>
 							<h1 class="version-name">Version:</h1>
 							<div class="version-color"></div>
-							<h1 class="version-name">(1.2)</h1>
+							<h1 class="version-name">(1.3)</h1>
 						</div>
 					</div>
 				</div>
@@ -83,10 +84,10 @@
 			</div>
 			<div class="panel results">
 				<div class="palette">
-					<div class="base color"></div>
-					<div class="complementary color"></div>
-					<div class="shadows color"></div>
-					<div class="background color"></div>
+					<div class="base color" data-clipboard-target=".base.hex"></div>
+					<div class="complementary color" data-clipboard-target=".complementary.hex"></div>
+					<div class="shadows color" data-clipboard-target=".shadows.hex"></div>
+					<div class="background color" data-clipboard-target=".background.hex"></div>
 				</div>
 				<div class="colorsHex">
 					<div class="base hex"></div>
