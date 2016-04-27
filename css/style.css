@@ -121,7 +121,7 @@ html, body {
 
 .hex > span.string {
 	height: 43px;
-    overflow: auto;
+    overflow: hidden;
     margin: auto;
     position: absolute;
     top: 0;
@@ -135,7 +135,7 @@ html, body {
     color: #F00;
     font-weight: 800;
     height: 75px;
-    overflow: auto;
+    overflow: hidden;
     margin: auto;
     position: absolute;
     top: 0;

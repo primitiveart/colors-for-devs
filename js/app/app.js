@@ -3,7 +3,7 @@ var app = angular.module('colorIpsum',['ngAnimate']);
 app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($scope, coloripsum, $timeout) {
 	
 	$scope.versionColor = '#E52B50';
-	$scope.version = '1.5';
+	$scope.version = '1.6';
 	
 	$scope.scheme = {
 		main : '#000000',
@@ -147,9 +147,9 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
     */
 	function checkForUrlValues(){
 		var scheme = null;
-		var currentState = window.location.pathname;
-		var hrefArray = currentState.split('/');
-		var hexString = hrefArray[hrefArray.length - 1];
+		var currentPath = window.location.pathname;
+		var pathArray = currentPath.split('/');
+		var hexString = pathArray[pathArray.length - 1];
 		if(hexString.match(/^(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})$/ig) !== null){
 			var colorsArray = hexString.split('-');
 			scheme = {
@@ -164,8 +164,6 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 					light : colorsArray[3]
 				}
 			};
-			
-			history.replaceState({scheme: scheme}, 'Color for devs');
 		}
 		
 		return scheme;
@@ -178,7 +176,7 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 	function generatePaletteFromURL(options){
 		var scheme = coloripsum.generatePaletteFromURL(options);
 		
-		history.replaceState({scheme: scheme}, 'Color for devs');
+		historyRefresh(scheme, 'Colors for devs');
 		
 		return scheme;
 	}
@@ -190,7 +188,7 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 	function randomScheme(){
 		var scheme = coloripsum.random();
 		
-		history.pushState({scheme: scheme}, 'Color for devs', '/'+scheme.noHash.main+'-'+scheme.noHash.complementary+'-'+scheme.noHash.dark+'-'+scheme.noHash.light+'');
+		historyRefresh(scheme, 'Colors for devs');
 		
 		return scheme;
 	}
@@ -203,7 +201,7 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 	function palette(options){
 		var scheme = coloripsum.palette(options);
 		
-		history.pushState({scheme: scheme}, 'Color for devs', '/'+scheme.noHash.main+'-'+scheme.noHash.complementary+'-'+scheme.noHash.dark+'-'+scheme.noHash.light+'');
+		historyRefresh(scheme, 'Colors for devs');
 		
 		return scheme;
 	}
@@ -217,6 +215,27 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 		var scheme = coloripsum.palette(options);
 		
 		return scheme;
+	}
+	
+	/**
+    * Manage HTML5 history url change (push or replace)
+    *
+	* @param {obj} scheme		The current scheme
+	* @param {str} title        The page title
+    */
+	function historyRefresh(scheme, title){
+		var currentPath = window.location.pathname;
+		var pathArray = currentPath.split('/');
+		var currentURL = '/'+pathArray[pathArray.length - 1];
+		
+		var newURL =  '/'+scheme.noHash.main+'-'+scheme.noHash.complementary+'-'+scheme.noHash.dark+'-'+scheme.noHash.light+'';
+		
+		if(newURL === currentURL){
+			history.replaceState({scheme: scheme}, title);
+		}
+		else {
+			history.pushState({scheme: scheme}, title, newURL);
+		}
 	}
 }]);
 
@@ -250,6 +269,20 @@ app.directive('spectrum', function() {
 					'background' : color.main
 				});
 			});
+        }
+    };
+});
+
+/**
+* Directive to focus on an element
+*
+* Can't give isolated scope because it will result in $compile:multidir error
+*/
+app.directive('setFocus', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element[0].focus();
         }
     };
 });
