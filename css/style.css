@@ -304,6 +304,7 @@ a.share-button {
     vertical-align: middle;
     margin-top: 5%;
 	display: none;
+    overflow: hidden;
 }
 
 .version-palette {
@@ -333,6 +334,7 @@ a.share-button {
 	width: 80%;
     height: 100%;
     float: left;
+    overflow: auto;
 }
 
 .about-title {
@@ -342,7 +344,6 @@ a.share-button {
 }
 
 .version-name {
-    text-align: center;
     font-family: montserrat;
     font-size: 24px;
     display: inline-block;
@@ -350,9 +351,10 @@ a.share-button {
 }
 
 .version-description {
-	font-family: montserrat;
+	font-family: roboto;
 	font-size: 16px;
     margin-top: 0;
+    line-height: 180%;
 }
 
 .about-description {
@@ -528,6 +530,10 @@ a.share-button {
 		margin-top: 70px;
 		margin-bottom: 40px;
 	}
+    
+    .hex {
+        font-size: 30px;
+    }
 	
 }
 

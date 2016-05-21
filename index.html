@@ -37,7 +37,7 @@
 	</head>
 	<body>
 		<div id="container" ng-controller="mainController" ng-keyup="onKeyUp($event)" tabindex="0" set-focus>
-			<div class="panel about" ng-click="closeAbout()">
+			<div class="panel about" ng-click="closeAbout($event)" ng-mouseover="changeCursor($event)">
 				<div class="about-container">
 					<div class="version-palette">
 						<div class="base version" ng-style="{background: versionScheme.main}"></div>
@@ -48,7 +48,17 @@
 					<div class="about-main" ng-style="{color: versionScheme.dark}">
 						<div class="about-description">
 							<h1 class="version-name">What is this site?</h1>
-							<p class="version-description">Colors for devs is designed and developed as a tool for helping developers (and people who don't enjoy messing around with colors) create palettes for their projects. </p>
+							<p class="version-description">Colors for devs is a quick and easy way to create color palettes for your web projects. It’s a tool designed for people who are not familiar with color theory and just need a ready to use color palette, so don’t expect any fancy and multicolored palettes. </p>
+                            <h1 class="version-name">What about the palette?</h1>
+                            <p class="version-description">The generated palette consists of four colors: the base color (random or user selected), an accent color (<a href="https://www.wikiwand.com/en/Complementary_colors" target="_blank" ng-style="{color: versionScheme.main}">complementary</a>) and two harmonious shades of gray (dark and light). </p>
+                            <p class="version-description">Bellow you can find some ideas of how you could use each color:
+                                <br><br><b>Base:</b> self-explanatory
+                                <br><br><b>Accent:</b> buttons, links and anything you want to stand out
+                                <br><br><b>Dark gray:</b> texts (light background), shadows, outlines 
+                                <br><br><b>Light gray:</b> texts (dark background), background  
+                            </p>
+                            <h1 class="version-name">Need anything else?</h1>
+                            <p class="version-description">Don’t hesitate to contact us at <b>hello@coloripsum.com</b> or find us on <a href="https://twitter.com/coloripsum" target="_blank" ng-style="{color: versionScheme.main}" style="text-decoration:none;"><b>Twitter</b></a>.</p>
 							<h1 class="version-name">Version:</h1>
 							<div class="version-color" ng-style="{background: versionColor}"></div>
 							<h1 class="version-name">({{version}})</h1>

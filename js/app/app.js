@@ -72,17 +72,29 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 		$('.about').fadeIn(200);
 		$('.about-container').show('drop', { direction:'down' }, 200, function(){
 			$('body').css('overflow','auto');
-			$('.about').css('cursor', 'url(close.gif), crosshair');
 		});
 	}
 	
-	$scope.closeAbout = function(){
-		$('.about').css('cursor', 'auto');
-		$('body').css('overflow','hidden');
-		$('.about').fadeOut(200);
-		$('.about-container').hide('drop', { direction:'down' }, 200, function(){
-			$('body').css('overflow','auto');
-		});
+	$scope.closeAbout = function($event){
+        var target = $event.target.className;
+        if(target === "panel about"){
+            $('.about').css('cursor', 'auto');
+            $('body').css('overflow','hidden');
+            $('.about').fadeOut(200);
+            $('.about-container').hide('drop', { direction:'down' }, 200, function(){
+                $('body').css('overflow','auto');
+            });
+        }
+	}
+    
+    $scope.changeCursor = function($event){
+        var target = $event.target.className;
+        if(target === "panel about"){
+            $('.about').css('cursor', 'url(close.gif), crosshair');
+        }
+        else {
+            $('.about').css('cursor', 'auto');
+        }
 	}
 	
 	$scope.selectHexString = function($event){
