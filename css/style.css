@@ -295,7 +295,8 @@ a.share-button {
 }
 
 .about-container {
-    width: 500px;
+    min-width: 500px;
+    width: 30%;
     height: 80%;
     background: #fff;
     margin: auto;
