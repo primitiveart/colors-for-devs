@@ -53,19 +53,19 @@ app.service('coloripsum', function() {
 		var palette = new paletteTemplate();
 		
 		palette.main = opts.mainHex;
-		palette.noHash.main = cutHex(palette.main);
+		palette.noHash.main = cutHex(palette.main).toUpperCase();
 		palette.luminocity.main = hexLuminocity(palette.main);
 		
 		palette.complementary = findComplementary(opts.mainHex);
-		palette.noHash.complementary = cutHex(palette.complementary);
+		palette.noHash.complementary = cutHex(palette.complementary).toUpperCase();
 		palette.luminocity.complementary = hexLuminocity(palette.complementary);
 		
 		palette.dark = hexBlendOverlay(opts.mainHex, 0.2, opts.darkHex);
-		palette.noHash.dark = cutHex(palette.dark);
+		palette.noHash.dark = cutHex(palette.dark).toUpperCase();
 		palette.luminocity.dark = hexLuminocity(palette.dark);
 		
 		palette.light = hexBlendOverlay(opts.mainHex, 0.2, opts.lightHex);
-		palette.noHash.light = cutHex(palette.light);
+		palette.noHash.light = cutHex(palette.light).toUpperCase();
 		palette.luminocity.light = hexLuminocity(palette.light);
 
 		palette.uiColors = extend(palette.uiColors, generateUIColors(palette.main));
