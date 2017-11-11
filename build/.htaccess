@@ -2,7 +2,7 @@
 <ifModule mod_rewrite.c>
     RewriteEngine On
     
-    RewriteRule ^(css|js)($|/) - [L]
+    RewriteRule ^(app|assets)($|/) - [L]
 	
 	RewriteRule  ^([^/]+)\/(.*)$     $2 [L]
 	
