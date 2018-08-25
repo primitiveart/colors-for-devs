@@ -4,29 +4,30 @@
     "description": "Colors for devs makes it easy for you to create a color palette for your next project.",
     "main": "index.js",
     "dependencies": {
-        "angular": "^1.6.6",
-        "angular-animate": "^1.6.6",
-        "jquery": "^3.2.1",
-        "jquery-ui-dist": "^1.12.1",
+        "angular": "^1.7.3",
+        "angular-animate": "^1.7.3",
         "clipboard": "",
+        "jquery": "^3.3.1",
+        "jquery-ui-dist": "^1.12.1",
         "spectrum-colorpicker": ""
     },
     "devDependencies": {
-        "graceful-fs": "^4.1.11",
-        "minimatch": "^3.0.4",
         "del": "^3.0.0",
+        "graceful-fs": "^4.1.11",
         "gulp": "^3.9.1",
-        "gulp-npm-files": "",
-        "gulp-web-dependencies": "",
-        "gulp-clean-css": "^3.9.0",
+        "gulp-clean-css": "^3.10.0",
         "gulp-concat": "^2.6.1",
-        "gulp-sourcemaps": "^2.6.1",
-        "gulp-uglify": "^3.0.0",
-        "gulp-webserver": "^0.9.1"
+        "gulp-npm-files": "",
+        "gulp-sourcemaps": "^2.6.4",
+        "gulp-uglify": "^3.0.1",
+        "gulp-web-dependencies": "",
+        "gulp-webserver": "^0.9.1",
+        "minimatch": "^3.0.4"
     },
     "scripts": {
         "prestart": "gulp",
-        "start": "gulp webserver"
+        "start": "gulp webserver",
+        "build": "gulp default"
     },
     "author": "Christos Kamtsiou",
     "repository": {
