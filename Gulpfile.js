@@ -6,23 +6,26 @@ var dependencies  = require('gulp-web-dependencies');
 var concat        = require('gulp-concat');
 var uglify        = require('gulp-uglify');
 var sourcemaps    = require('gulp-sourcemaps');
-var webserver     = require('gulp-webserver');
+var connect       = require('gulp-connect');
+var gulpif        = require('gulp-if');
+var workboxBuild  = require('workbox-build');
 
 // Delete build folder
 gulp.task('clean', function() {
 	return del('build/');
 });
 
-// Compile SASS and minify
-gulp.task('minify_css', function() {
-    gulp.src('source/assets/css/*.css')
-		.pipe(cssmin())
-        .pipe(gulp.dest('build/assets/css/'));
+// Copy static files such as assets and .htaccess in build folder
+gulp.task('copy_static', function() {
+    return gulp.src(['source/**', 'source/.*', '!source/sw.js', '!source/app/**', '!source/index.html'])
+        // Minify CSS files
+        .pipe(gulpif('assets/css/*.css', cssmin())) 
+        .pipe(gulp.dest('build/'));
 });
 
-// Task to copy dependencies in build folder (angular files)
+// Copy dependencies in build folder (node_modules)
 gulp.task('copy_dependencies', function() {
-    gulp.src('source/index.html')
+    return gulp.src('source/index.html')
         .pipe(dependencies({
             dest: 'build/',   
             prefix: '/assets/dependencies/',  
@@ -30,46 +33,56 @@ gulp.task('copy_dependencies', function() {
         .pipe(gulp.dest('build/'));
 });
 
-// Copy assets folder (exclude sass folder) in build folder
-gulp.task('copy_assets', function() {
-    gulp.src(['source/assets/**', '!source/assets/css', '!source/assets/css/**'])
-        .pipe(gulp.dest('build/assets/'));
-});
-
-// Copy index file in build folder
-gulp.task('copy_htaccess', function() {
-    gulp.src('source/.htaccess')
-        .pipe(gulp.dest('build/'));
-});
-
-// Task to copy project files in build folder
-gulp.task('copy_project', ['copy_assets', 'copy_htaccess']);
-
 // Concat, uglify and create sourcemap for application js files and move the final result (app.js) in build folder
 gulp.task('prepare_js', function () {
-	gulp.src(['source/app/app.js', 'source/app/coloripsum.js'])
-		.pipe(sourcemaps.init())
-			.pipe(concat('app.js'))
-			.pipe(uglify())
-		.pipe(sourcemaps.write())
+	return gulp.src(['source/app/app.js', 'source/app/coloripsum.js'])
+        .pipe(concat('app.js'))
+        .pipe(uglify())
 		.pipe(gulp.dest('build/app/'))
+        .pipe(connect.reload());
+});
+
+gulp.task('minify_dependencies', function() {
+    return gulp.src(['build/assets/dependencies/**', '!build/assets/dependencies/**/*.min.*'])
+        .pipe(gulpif('*.css', cssmin()))
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulp.dest('build/assets/dependencies/'));
+});
+
+// Generate the service worker
+gulp.task('service_worker', function() {
+    return workboxBuild.injectManifest({
+        swSrc: 'source/sw.js',
+        swDest: 'build/sw.js',
+        globDirectory: 'build',
+        globPatterns: [
+          '**\/*.{js,json,css,html,png,ico,gif}',
+        ]
+    }).then(function({count, size, warnings}) {
+        // Optionally, log any warnings and details.
+        warnings.forEach(console.warn);
+        console.log(count + ' files will be precached, totaling ' + size + ' bytes.');
+    });
 });
 
 // Task to prepare the build folder (basically runs every required action to create the final build)
-gulp.task('prepare', ['copy_project', 'copy_dependencies', 'minify_css', 'prepare_js']);
+gulp.task('prepare', gulp.series(['copy_static', 'copy_dependencies', 'prepare_js', 'minify_dependencies', 'service_worker']));
 
 // Task to watch any changes in src folder and refresh the build
 gulp.task('watch', function() {
-	gulp.watch(['source/**'], ['default']);
+	return gulp.watch(['source/**'], gulp.series('default'));
 });
 
 // Task to create a webserver (and the watcher) with livereload functionality
-gulp.task('webserver', ['watch'], function() {
-	gulp.src('build')
-		.pipe(webserver({ livereload: true }));
-});
+gulp.task('connect', gulp.series(function(done) {
+    connect.server({
+        port: 8000,
+        root: 'build',
+        livereload: true
+    });
+    
+    done();
+}, 'watch'));
 
 // The default task cleans the build folder and prepares the project
-gulp.task('default', ['clean'], function() { 
-    gulp.start('prepare');
-});
+gulp.task('default', gulp.series(['clean', 'prepare']));
