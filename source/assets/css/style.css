@@ -74,7 +74,7 @@ html, body {
     border-radius: 100%;
     background: #E52B50;
     vertical-align: middle;
-    margin: auto 5px;
+    margin: 5px;
 }
 
 .results {
@@ -462,11 +462,16 @@ a.share-button {
 		width: 100%;
 		height: auto;
 		float: none;
-		padding-top: 80px;
+		padding-top: 70px;
+	}
+    
+    .title {
+		font-size: 60px;
 	}
 	
 	.title p {
 		margin-top: 0;
+        margin-bottom: 40px;
 	}
 	
 	.share-wrapper {
@@ -522,32 +527,6 @@ a.share-button {
 	
 }
 
-@media screen and (max-width: 605px) {
-	
-	.main {
-		padding-top: 70px;
-	}
-	
-	.title {
-		font-size: 60px;
-	}
-	
-	.title p {
-		margin-bottom: 40px;
-	}
-	
-}
-
-@media screen and (max-width: 500px) {
-	
-	.about-container {
-		min-width: 100%;
-		border-left: none;
-		border-right: none;
-	}
-	
-}
-
 @media screen and (max-height: 800px) and (min-width: 831px) {
 	
 	.title {
@@ -579,10 +558,6 @@ a.share-button {
 		margin-bottom: 30px;
 	}
 	
-	.controls h1 {
-		display: none;
-	}
-	
 	.refresh {
 		width: 232px;
 	}
@@ -605,22 +580,120 @@ a.share-button {
 	
 }
 
-@media screen and (max-height: 740px) and (max-width: 470px) {
-	.title {
-		font-size: 30px;
-	}
-}
-
 @media screen and (max-height: 570px) and (max-width: 830px) {
 	
 	.title {
 		display: none;
 	}
+    
+    .controls h1 {
+        display: none;
+    }
 	
 	.build-info {
 		display: none;
 	}
 	
+}
+
+@media screen and (max-width: 500px) {
+    
+    #container {
+        display: -webkit-flex; 
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+    
+    .about-container {
+        min-width: 100%;
+		border-left: none;
+		border-right: none;
+        display: -webkit-flex; 
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        height: calc(100% - 50px);
+	}
+    
+    .about.show .about-container {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    
+    .panel.about.show::after {
+        content: 'Back to homescreen';
+        font-size: 18px;
+        position: absolute;
+        font-family: montserrat;
+        left: 50vw;
+        transform: translate3d(-50%,7px,0);
+        padding: 5px 12px;
+        border-radius: 4px;
+        color: #383838;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+    
+    .about-main {
+        width: 100%;
+    }
+    
+    .version-palette {
+        display: -webkit-flex; 
+        display: flex;
+        height: 15px;
+        width: 100%;
+        box-shadow: 0 0 50px 0px rgba(119, 119, 119, .3);
+    }
+    
+    .base.version,
+    .complementary.version,
+    .shadows.version,
+    .background.version{
+        height: 100%;
+    }
+	    
+    .main {
+		padding-top: 30px;
+	}
+	
+	.title {
+		font-size: 40px;
+	}
+	
+	.title p {
+		margin-bottom: 30px;
+	}
+	
+	.refresh {
+		width: 232px;
+	}
+	
+	.button_fa, .sp-replacer {
+		margin: auto 20px!important;
+	}
+	
+	.separator {
+		display: none;
+	}
+	
+	.results {
+		padding-top: 45px;
+	}
+	
+	.colorsHex {
+		top: 55px;
+	}
+    
+	.controls h1 {
+		display: none;
+	}
+    
+    .build-info p {
+		display: none;
+	}
 }
 
 /* Spectrum style overrides */

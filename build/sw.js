@@ -36,11 +36,11 @@ workbox.precaching.precache([
 workbox.precaching.precacheAndRoute([
   {
     "url": "app/app.js",
-    "revision": "8c29a7d6353a42b2a7f6a5e8b358cde6"
+    "revision": "77b293569308d443880b1cc7e4fe70ae"
   },
   {
     "url": "assets/css/style.css",
-    "revision": "7813a35a65d3116c519dcbb0c367f15a"
+    "revision": "3705a26cff222cb5b265658af40b1204"
   },
   {
     "url": "assets/dependencies/angular-animate/angular-animate.min.js",
@@ -108,11 +108,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "ac5491c92728dce630077cd9092c76fb"
+    "revision": "cc044efbb86d26b1916eda0b4e557355"
   },
   {
     "url": "manifest.json",
-    "revision": "9f9fe40501d9bd28ff9b806299705071"
+    "revision": "3dea9821ddcfd0e1c6c07ede1ed2b13a"
   }
 ],
     {

@@ -1,11 +1,12 @@
 var app = angular.module('colorIpsum',['ngAnimate']);
 
-app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($scope, coloripsum, $timeout) {
+app.controller('mainController', ['$rootScope', '$scope', 'coloripsum', '$timeout', function($rootScope, $scope, coloripsum, $timeout) {
 	
 	$scope.versionColor = '#E52B50';
 	$scope.version      = '1.8';
 	
-	$scope.scheme = {
+    // Expose to $rootScope to be able to use it outside the controller
+	$rootScope.scheme = {
 		main : '#000000',
 		complementary : '#000000',
 		dark : '#000000',
@@ -35,14 +36,14 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 	
 	// Check if color palette is given through URL values
 	if (scheme !== null) {
-		$scope.scheme = generatePaletteFromURL(scheme);
+		$rootScope.scheme = generatePaletteFromURL(scheme);
 	} else {
-		$scope.scheme = randomScheme();
+		$rootScope.scheme = randomScheme();
 	}	
 	
 	$scope.onKeyUp = function($event) {
 		if ($event.keyCode == 32) {
-			$scope.scheme = randomScheme();
+			$rootScope.scheme = randomScheme();
 		}
 	};
 	
@@ -54,7 +55,7 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 		}, 700);
 		
 		
-		$scope.scheme = randomScheme();
+		$rootScope.scheme = randomScheme();
 	};
 	
 	//Need palette function to be accessible from scope to use it in spectrum directive
@@ -69,6 +70,8 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
         
 		$scope.versionScheme = versionPalette(options);
         
+        $('body').css('overflow', 'hidden');
+        
         $('.about').addClass('show');
 	};
 	
@@ -77,6 +80,8 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
         
         if (target === "panel about show") {
             $('.about').css('cursor', 'auto');
+            
+            $('body').css('overflow','auto');
             
             $('.about').removeClass('show');
         }
@@ -144,7 +149,7 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 	window.onpopstate = function(event) {
 		if (event.state !== null) {
 			$scope.$apply(function() {
-				$scope.scheme = event.state.scheme;
+				$rootScope.scheme = event.state.scheme;
 			});
 		}
 	};
@@ -261,7 +266,7 @@ app.controller('mainController', ['$scope', 'coloripsum', '$timeout', function($
 * Directive for spectrum jQuery plugin
 *
 */
-app.directive('spectrum', function() {
+app.directive('spectrum', ['$rootScope', function($rootScope) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
@@ -278,8 +283,8 @@ app.directive('spectrum', function() {
 					mainHex : tinycolor.toHexString()
 				}
 				
-				scope.$apply(function() {
-					scope.scheme = scope.generatePalette(options);
+				$rootScope.$apply(function() {
+					$rootScope.scheme = scope.generatePalette(options);
 				});
 			});
             
@@ -323,7 +328,7 @@ app.directive('spectrum', function() {
             }
         }
     };
-});
+}]);
 
 /**
 * Directive to focus on an element
