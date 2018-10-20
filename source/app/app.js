@@ -343,3 +343,19 @@ app.directive('setFocus', function() {
         }
     };
 });
+
+/**
+* Directive for non-blocking CSS loading
+*
+* Used as `<link rel='preload' href='style.css' as="style" load-async>`, browsers that support `rel='preload'` will preload the style without blocking DOM rendering, 
+* browsers that don't, will load it after this directive runs
+*/
+app.directive('loadAsync', ['$rootScope', function($rootScope) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            // Load stylesheet
+            element[0].rel='stylesheet';
+        }
+    };
+}]);

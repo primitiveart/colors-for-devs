@@ -1,3 +1,15 @@
+# Enable caching 
+<ifModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/png "access 1 hour"
+    ExpiresByType image/gif "access 1 hour"
+    ExpiresByType image/jpeg "access 1 hour"
+    ExpiresByType text/javascript "access 2 weeks"
+    ExpiresByType text/css "access 2 months"
+    ExpiresByType text/html "modification 4 hours"
+    ExpiresDefault "access 2 days"
+</ifModule>
+
 # html5 pushstate (history) support:
 <ifModule mod_rewrite.c>
     RewriteEngine On
@@ -9,12 +21,21 @@
     # Rewrite rules for Open SSL certification
     RewriteRule ^.well-known - [L]
     
+    # Rewrite rules for robots.txt
+    RewriteRule ^robots.txt - [L]
+    
     RewriteRule ^(app|assets)($|/) - [L]
 	
 	RewriteRule  ^([^/]+)\/(.*)$     $2 [L]
 	
     RewriteCond %{REQUEST_FILENAME} !\.(js|css|gif|jpg|jpeg|png|ico|swf|pdf|html|php|json)$
     RewriteCond %{REQUEST_URI} !^index
-    RewriteRule (.*) index.html [L]
-		
+    RewriteRule (.*) index.html [L]	
+</ifModule>
+
+# Enable Deflate 
+<ifModule mod_deflate.c>
+    <filesMatch "\.(js|css|html)$">
+        SetOutputFilter DEFLATE
+    </filesMatch>
 </ifModule>
