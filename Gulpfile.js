@@ -19,7 +19,7 @@ gulp.task('clean', function() {
 gulp.task('copy_static', function() {
     return gulp.src(['source/**', 'source/.*', '!source/sw.js', '!source/app/**', '!source/index.html'])
         // Minify CSS files
-        .pipe(gulpif('assets/css/*.css', cssmin())) 
+        .pipe(gulpif('assets/css/*.css', cssmin()))
         .pipe(gulp.dest('build/'));
 });
 
@@ -27,8 +27,8 @@ gulp.task('copy_static', function() {
 gulp.task('copy_dependencies', function() {
     return gulp.src('source/index.html')
         .pipe(dependencies({
-            dest: 'build/',   
-            prefix: '/assets/dependencies/',  
+            dest: 'build/',
+            prefix: '/assets/dependencies/',
         }))
         .pipe(gulp.dest('build/'));
 });
@@ -78,9 +78,10 @@ gulp.task('connect', gulp.series(function(done) {
     connect.server({
         port: 8000,
         root: 'build',
-        livereload: true
+        livereload: true,
+				host: '0.0.0.0'
     });
-    
+
     done();
 }, 'watch'));
 

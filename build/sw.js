@@ -1,25 +1,10 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.4.1/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js');
 
 workbox.googleAnalytics.initialize();
 
 workbox.precaching.precache([
     {
         url: 'https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|Montserrat:400,500,600,700,800|Merienda+One',
-        revision: '292018'
-    }, {
-        url: 'https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmWUlfBBc4.woff2 ',
-        revision: '292018'
-    }, {
-        url: ' https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2',
-        revision: '292018'
-    }, {
-        url: 'https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_ZpC3gnD_g.woff2',
-        revision: '292018'
-    }, {
-        url: 'https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_bZF3gnD_g.woff2',
-        revision: '292018'
-    }, {
-        url: 'https://fonts.gstatic.com/s/meriendaone/v8/H4cgBXaMndbflEq6kyZ1ht6ohYaz.woff2',
         revision: '292018'
     }, {
         url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css',
@@ -33,97 +18,24 @@ workbox.precaching.precache([
     }
 ]);
 
-workbox.precaching.precacheAndRoute([
-  {
-    "url": "app/app.js",
-    "revision": "27a4b84326ce76826641b955f276823c"
-  },
-  {
-    "url": "assets/css/style.css",
-    "revision": "3705a26cff222cb5b265658af40b1204"
-  },
-  {
-    "url": "assets/dependencies/angular-animate/angular-animate.min.js",
-    "revision": "74b42c1f33b21c8bbd72bafbedbb85f6"
-  },
-  {
-    "url": "assets/dependencies/angular/angular.min.js",
-    "revision": "a3635f2c02e1972150e3413d8a9656e8"
-  },
-  {
-    "url": "assets/dependencies/clipboard/dist/clipboard.min.js",
-    "revision": "ac41e63d15e88d7d9bdd42592ffff7a2"
-  },
-  {
-    "url": "assets/dependencies/jquery/dist/jquery.min.js",
-    "revision": "a09e13ee94d51c524b7e2a728c7d4039"
-  },
-  {
-    "url": "assets/dependencies/spectrum-colorpicker/spectrum.css",
-    "revision": "7963263c39211caec54502c8ab1dbdb1"
-  },
-  {
-    "url": "assets/dependencies/spectrum-colorpicker/spectrum.js",
-    "revision": "354a9e65608da32d1133803920620a54"
-  },
-  {
-    "url": "assets/images/close.gif",
-    "revision": "3833da2a26a7a594655870c7d8583d9f"
-  },
-  {
-    "url": "assets/images/favicon.ico",
-    "revision": "2f39fdc509a0f815ae184768e236a757"
-  },
-  {
-    "url": "assets/images/icons/icon-128x128.png",
-    "revision": "1f4d65bf8ef326fe6d5604809b322787"
-  },
-  {
-    "url": "assets/images/icons/icon-144x144.png",
-    "revision": "def0b7775ce162711e2f0c5081c7b759"
-  },
-  {
-    "url": "assets/images/icons/icon-152x152.png",
-    "revision": "97e0c01a8dd294796914030a25fa1abb"
-  },
-  {
-    "url": "assets/images/icons/icon-192x192.png",
-    "revision": "db2b4853621cc2336314aa7515bd7bd1"
-  },
-  {
-    "url": "assets/images/icons/icon-384x384.png",
-    "revision": "fbe26d5b0dc7f41e756a5e3548d788e8"
-  },
-  {
-    "url": "assets/images/icons/icon-512x512.png",
-    "revision": "6414ecee83537a36c968942f0bb8f25c"
-  },
-  {
-    "url": "assets/images/icons/icon-72x72.png",
-    "revision": "05ceb70d302116dc287f7f16019a36b1"
-  },
-  {
-    "url": "assets/images/icons/icon-96x96.png",
-    "revision": "8b8659f77b634c0b553ae168f905184f"
-  },
-  {
-    "url": "index.html",
-    "revision": "cd8479c748f584a72be1814fe206a6c4"
-  },
-  {
-    "url": "manifest.json",
-    "revision": "3dea9821ddcfd0e1c6c07ede1ed2b13a"
-  }
-],
+workbox.precaching.precacheAndRoute(
+    [{"revision":"b9ca3dad57dcec43e6798023da14184b","url":"app/app.js"},{"revision":"587a014970fa69fec4338fff84e243d5","url":"assets/css/style.css"},{"revision":"b3d84d8d33032136af4033aa94e47d93","url":"assets/dependencies/angular-animate/angular-animate.min.js"},{"revision":"613274fe74404112d98709adf0a28b69","url":"assets/dependencies/angular/angular.min.js"},{"revision":"af8ab36589315582ccdd82f22e84bffb","url":"assets/dependencies/clipboard/dist/clipboard.min.js"},{"revision":"dc5e7f18c8d36ac1d3d4753a87c98d0a","url":"assets/dependencies/jquery/dist/jquery.min.js"},{"revision":"7963263c39211caec54502c8ab1dbdb1","url":"assets/dependencies/spectrum-colorpicker/spectrum.css"},{"revision":"983d789ca8236c0fb994391e7f0e34f7","url":"assets/dependencies/spectrum-colorpicker/spectrum.js"},{"revision":"3833da2a26a7a594655870c7d8583d9f","url":"assets/images/close.gif"},{"revision":"14e65ac186661f51bf5f5e150a316f00","url":"assets/images/favicon.ico"},{"revision":"db632b09f9e795fea8674e116acd2fac","url":"assets/images/icons/apple-touch-icon-precomposed.png"},{"revision":"e492bdaa850cfff074ec069cac24dd92","url":"assets/images/icons/icon-128x128.png"},{"revision":"94e221676b486b85571c83eb515b17e4","url":"assets/images/icons/icon-144x144.png"},{"revision":"ed3720f381e04c4fae1e9c8a111f798e","url":"assets/images/icons/icon-152x152.png"},{"revision":"7fa5ecfc3c3a064aa30819cb31851014","url":"assets/images/icons/icon-192x192.png"},{"revision":"a5a75d4e80057dc3b804e99bbfd45570","url":"assets/images/icons/icon-384x384.png"},{"revision":"71c9359568355f02cd0e2b81262a9b5e","url":"assets/images/icons/icon-512x512.png"},{"revision":"7e66d8acab6bffdb217b615f53fdc550","url":"assets/images/icons/icon-72x72.png"},{"revision":"caa9104de8bd7a354387834504fa575c","url":"assets/images/icons/icon-96x96.png"},{"revision":"cd4e58df8616229526ccfc7046fad1fb","url":"index.html"},{"revision":"04e95aec2fc17eace41cd484fcd0831c","url":"manifest.json"}],
     {
         ignoreUrlParametersMatching: [/.*/]
     }
 );
+
+workbox.loadModule('workbox-strategies');
 
 self.addEventListener('fetch', function(event) {
     // Redirect URLs with hex codes to index.html
     if (event.request.url.match(/(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})-(([a-fA-F0-9]){6})$/ig) !== null) {
         event.respondWith(fetch('/index.html'));
     }
-});
 
+    // Cache google fonts (don't use `workbox.precaching.precache` since versions could change)
+    if (event.request.url.startsWith('https://fonts.gstatic.com/s/')) {
+        var CacheFirst = new workbox.strategies.CacheFirst();
+        event.respondWith(CacheFirst.handle({event: event, request: event.request}));
+    }
+});
