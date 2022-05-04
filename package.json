@@ -4,7 +4,7 @@
     "description": "Colors for devs makes it easy for you to create a color palette for your next project.",
     "main": "index.js",
     "dependencies": {
-        "angular": "^1.7.9",
+        "angular": "^1.8.3",
         "angular-animate": "^1.7.9",
         "clipboard": "^2.0.6",
         "jquery": "^3.5.1",
